@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anprogamernafti-boop.github.io/asserfolio/sitemap.xml

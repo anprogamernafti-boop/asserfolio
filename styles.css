@@ -261,3 +261,68 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outlin
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* SEO and contact additions */
+.demo-section {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+.demo-heading {
+  margin-bottom: 2.5rem;
+}
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.demo-card {
+  min-height: 13rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  color: #f4f2ed;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.demo-card:hover,
+.demo-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 1rem 2rem rgba(17, 21, 27, .14);
+}
+.demo-card img {
+  display: block;
+  object-fit: contain;
+  object-position: left center;
+}
+.demo-card-nafti { background: #18202a; }
+.demo-card-clash { background: #2d1f3b; }
+.demo-card-fashion { background: #24201e; }
+.demo-card-fashion img {
+  width: calc(100% + 2.5rem);
+  max-width: none;
+  height: 7rem;
+  margin: -1.25rem -1.25rem 0;
+  object-fit: cover;
+  object-position: center;
+  opacity: .82;
+}
+.demo-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.demo-card-copy strong { font-size: 1.15rem; }
+.demo-card-copy small { color: rgba(244, 242, 237, .72); }
+.contact-direct-note {
+  max-width: 34rem;
+  margin-top: -1rem;
+  color: rgba(244, 242, 237, .72);
+  font-size: .95rem;
+}
+@media (max-width: 800px) {
+  .demo-grid { grid-template-columns: 1fr; }
+  .demo-card { min-height: 10rem; }
+}

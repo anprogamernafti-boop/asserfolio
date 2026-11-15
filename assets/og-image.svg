@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Asser Nafti — Web, Android &amp; AI Products</title>
+  <desc id="desc">Portfolio of personal projects in web development, Android, AI integrations and product interfaces.</desc>
+  <rect width="1200" height="630" fill="#f4f2ed"/>
+  <rect x="780" y="0" width="420" height="630" fill="#11151b"/>
+  <path d="M780 0h420v630h-420c82-101 119-204 107-310C875 207 835 103 780 0Z" fill="#1d2730"/>
+  <path d="M790 571c116-91 202-207 272-351" fill="none" stroke="#d65a2f" stroke-width="12"/>
+  <circle cx="1035" cy="312" r="128" fill="none" stroke="#d65a2f" stroke-opacity=".45" stroke-width="2"/>
+  <circle cx="1035" cy="312" r="80" fill="none" stroke="#f4f2ed" stroke-opacity=".17" stroke-width="2"/>
+  <text x="72" y="88" fill="#d65a2f" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="5">ASSER NAFTI</text>
+  <text x="72" y="238" fill="#11151b" font-family="Arial, sans-serif" font-size="82" font-weight="700">Useful products.</text>
+  <text x="72" y="334" fill="#d65a2f" font-family="Arial, sans-serif" font-size="82" font-weight="700">Clear interfaces.</text>
+  <text x="72" y="430" fill="#11151b" font-family="Arial, sans-serif" font-size="82" font-weight="700">Built to ship.</text>
+  <text x="72" y="526" fill="#59616a" font-family="Arial, sans-serif" font-size="24" letter-spacing="2">WEB · ANDROID · PRODUCT BUILDING</text>
+  <text x="860" y="120" fill="#f4f2ed" font-family="Arial, sans-serif" font-size="20" letter-spacing="4">PERSONAL PROJECTS</text>
+  <text x="860" y="390" fill="#f4f2ed" font-family="Arial, sans-serif" font-size="30" font-weight="700">Nafti AI</text>
+  <text x="860" y="432" fill="#f4f2ed" font-family="Arial, sans-serif" font-size="30" font-weight="700">Clash AI</text>
+  <text x="860" y="474" fill="#f4f2ed" font-family="Arial, sans-serif" font-size="30" font-weight="700">Fashion In Motion</text>
+</svg>
