@@ -56,3 +56,17 @@ if (contactForm) {
       });
   });
 }
+
+// If the Fashion In Motion logo file is ever missing, show the text wordmark instead of a broken image.
+document.querySelectorAll(".demo-logo").forEach((img) => {
+  const showWordmark = () => {
+    const mark = document.createElement("span");
+    mark.className = "demo-mark";
+    mark.setAttribute("role", "img");
+    mark.setAttribute("aria-label", "Fashion In Motion logo");
+    mark.innerHTML = 'FASHION<em>in MOTION</em>';
+    img.replaceWith(mark);
+  };
+  img.addEventListener("error", showWordmark, { once: true });
+  if (img.complete && img.naturalWidth === 0) showWordmark();
+});
