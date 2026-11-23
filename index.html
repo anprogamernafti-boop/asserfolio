@@ -2,6 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <script>
+      /* Intro splash: shown on every visit (add ?intro=0 to the address to skip it). */
+      (function () {
+        if (!/[?&]intro=0/.test(location.search)) document.documentElement.classList.add('intro-active');
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#11151b">
     <meta name="robots" content="index, follow">
@@ -25,6 +31,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="i18n.css">
+    <script src="i18n.js" defer></script>
     <script src="script.js" defer></script>
     <script type="application/ld+json">
       {
@@ -141,7 +149,27 @@
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="intro" id="intro" role="presentation">
+      <div class="intro-panel intro-panel-top" aria-hidden="true"></div>
+      <div class="intro-panel intro-panel-bottom" aria-hidden="true"></div>
+      <div class="intro-stage">
+        <div class="intro-bg" aria-hidden="true"></div>
+        <canvas class="intro-canvas" id="intro-canvas" aria-hidden="true"></canvas>
+        <p class="intro-tag" dir="ltr" aria-hidden="true">PORTFOLIO <i></i> WEB · ANDROID · AI</p>
+        <button type="button" class="intro-skipbtn" id="intro-skip" data-i18n="intro.skip">Skip</button>
+        <p class="intro-name">Asser Nafti</p>
+        <div class="intro-text">
+          <span class="intro-rule" aria-hidden="true"></span>
+          <p class="intro-line" data-i18n="intro.line">Useful products · Clear interfaces · Built to ship</p>
+          <p class="intro-loc" dir="ltr">SOUSSE <i aria-hidden="true"></i> TUNISIA</p>
+        </div>
+        <div class="intro-foot" aria-hidden="true">
+          <div class="intro-bar"><i></i></div>
+          <span class="intro-count" id="intro-count" dir="ltr">0%</span>
+        </div>
+      </div>
+    </div>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
     <header class="site-header">
       <div class="header-inner">
         <a class="wordmark" href="#top" aria-label="Asser Nafti, home">
@@ -149,59 +177,68 @@
           <span>ASSER NAFTI</span>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="#work">Selected work</a>
-          <a href="#approach">Approach</a>
-          <a href="#toolkit">Toolkit</a>
-          <a class="nav-cta" href="#contact">Let’s talk <span aria-hidden="true">↗</span></a>
+          <a href="#work" data-i18n="nav.work">Selected work</a>
+          <a href="#approach" data-i18n="nav.approach">Approach</a>
+          <a href="#toolkit" data-i18n="nav.toolkit">Toolkit</a>
+          <a class="nav-cta" href="#contact"><bdi data-i18n="nav.cta">Let’s talk</bdi> <span aria-hidden="true">↗</span></a>
         </nav>
+        <div class="lang-switch" role="group" aria-label="Language / Langue / اللغة">
+          <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+          <button type="button" data-lang="fr" aria-pressed="false" lang="fr">FR</button>
+          <button type="button" data-lang="ar" aria-pressed="false" lang="ar">العربية</button>
+        </div>
       </div>
     </header>
 
     <main id="main">
       <section class="hero section-shell" id="top" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> Web · Android · Product building</p>
-          <h1 id="hero-title">Useful products.<br><span class="accent-text">Clear interfaces.</span><br>Built to ship.</h1>
-          <p class="hero-lede">I’m Asser, a web and Android developer based in Sousse, Tunisia. Since August 2025, I’ve built independent products using responsive JavaScript interfaces, Python/Flask web applications, AI/API integrations, and Cloudflare deployment. My portfolio presents personal projects, not paid client engagements.</p>
-          <p class="positioning">Web &amp; Android App Developer <span>|</span> JavaScript, Python/Flask &amp; AI/API Integrations <span>|</span> Open to Well-Scoped Remote Freelance &amp; Part-Time Work</p>
+          <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> <bdi data-i18n="hero.eyebrow">Web · Android · Product building</bdi></p>
+          <h1 id="hero-title" data-i18n-html="hero.h1">Useful products.<br><span class="accent-text">Clear interfaces.</span><br>Built to ship.</h1>
+          <p class="hero-lede" data-i18n="hero.lede">I’m Asser, a web and Android developer based in Sousse, Tunisia. Since August 2025, I’ve built independent products using responsive JavaScript interfaces, Python/Flask web applications, AI/API integrations, and Cloudflare deployment. My portfolio presents personal projects, not paid client engagements.</p>
+          <p class="positioning"><bdi data-i18n="hero.pos1">Web &amp; Android App Developer</bdi> <span>|</span> <bdi data-i18n="hero.pos2">JavaScript, Python/Flask &amp; AI/API Integrations</bdi> <span>|</span> <bdi data-i18n="hero.pos3">Open to Well-Scoped Remote Freelance &amp; Part-Time Work</bdi></p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
-            <a class="text-link" href="https://www.linkedin.com/in/asser-nafti-622275448/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+            <a class="button button-primary" href="#work"><bdi data-i18n="hero.cta">Explore selected work</bdi> <span aria-hidden="true">↓</span></a>
+            <a class="button button-whatsapp" data-wa href="https://wa.me/21658863209?text=Hello%20Asser%2C%20I%20found%20your%20portfolio%20and%20I%E2%80%99d%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              <bdi data-i18n="wa.btn">Message me on WhatsApp</bdi>
+            </a>
+            <a class="text-link" href="https://www.linkedin.com/in/asser-nafti-622275448/" target="_blank" rel="noopener noreferrer"><bdi data-i18n="hero.li">Connect on LinkedIn</bdi> <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="hero-location"><span class="location-mark" aria-hidden="true">⌖</span> Sousse, Tunisia <span class="location-divider" aria-hidden="true"></span> Open to paid remote freelance and part-time work</div>
+          <div class="hero-location"><span class="location-mark" aria-hidden="true">⌖</span> <bdi data-i18n="hero.city">Sousse, Tunisia</bdi> <span class="location-divider" aria-hidden="true"></span> <bdi data-i18n="hero.open">Open to paid remote freelance and part-time work</bdi></div>
         </div>
         <div class="hero-art" aria-label="Web, Android, API and AI product capabilities">
-          <div class="hero-art-top"><span>INDEPENDENT PROJECTS</span><span>01 — 03</span></div>
-          <div class="hero-art-title">From first<br>interface to<br><em>live product.</em></div>
+          <div class="hero-art-top"><span data-i18n="art.top">INDEPENDENT PROJECTS</span><span>01 — 03</span></div>
+          <div class="hero-art-title" data-i18n-html="art.title">From first<br>interface to<br><em>live product.</em></div>
           <div class="flow-line" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="flow-labels"><span>DESIGN</span><span>INTEGRATE</span><span>DEPLOY</span></div>
+          <div class="flow-labels"><span data-i18n="art.l1">DESIGN</span><span data-i18n="art.l2">INTEGRATE</span><span data-i18n="art.l3">DEPLOY</span></div>
           <div class="hero-chip chip-one">JavaScript</div>
           <div class="hero-chip chip-two">Python / Flask</div>
           <div class="hero-chip chip-three">AI + APIs</div>
           <div class="hero-chip chip-four">Android</div>
-          <div class="hero-art-footer"><span>PRODUCT-MINDED DEVELOPMENT</span><span class="hero-spark" aria-hidden="true">✳</span></div>
+          <div class="hero-art-footer"><span data-i18n="art.foot">PRODUCT-MINDED DEVELOPMENT</span><span class="hero-spark" aria-hidden="true">✳</span></div>
         </div>
       </section>
 
       <section class="intro-band" aria-label="Professional summary">
         <div class="section-shell intro-band-inner">
-          <p class="section-kicker">A practical builder’s perspective</p>
-          <p class="intro-statement">Good software connects the interface, the integration, and the next step a person needs to take.</p>
+          <p class="section-kicker" data-i18n="intro.kicker">A practical builder’s perspective</p>
+          <p class="intro-statement" data-i18n="intro.text">Good software connects the interface, the integration, and the next step a person needs to take.</p>
         </div>
       </section>
 
       <section class="work-section section-shell" id="work" aria-labelledby="work-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Selected work <span class="eyebrow-line" aria-hidden="true"></span></p>
-            <h2 id="work-title">Three projects.<br><span class="muted-heading">Three product questions.</span></h2>
+            <p class="eyebrow"><bdi data-i18n="work.eyebrow">Selected work</bdi> <span class="eyebrow-line" aria-hidden="true"></span></p>
+            <h2 id="work-title" data-i18n-html="work.h2">Three projects.<br><span class="muted-heading">Three product questions.</span></h2>
           </div>
-          <p class="section-heading-note">Personal projects built to explore useful web, mobile, and AI-enabled experiences. They are not client engagements or salaried roles.</p>
+          <p class="section-heading-note" data-i18n="work.note">Personal projects built to explore useful web, mobile, and AI-enabled experiences. They are not client engagements or salaried roles.</p>
         </div>
 
         <article class="project-row project-nafti" aria-labelledby="nafti-title">
           <div class="project-visual visual-nafti">
-            <div class="visual-topline"><span>01 / MULTIMODAL WEB APP</span><span>PERSONAL PROJECT</span></div>
+            <div class="visual-topline"><span>01 / MULTIMODAL WEB APP</span><span data-i18n="personalUp">PERSONAL PROJECT</span></div>
             <div class="nafti-visual-core">
               <img src="assets/images/nafti-icon.png" alt="Nafti AI project icon" width="512" height="512" loading="lazy">
               <div class="visual-orbit orbit-one" aria-hidden="true"></div>
@@ -211,23 +248,23 @@
             <div class="visual-bottomline"><span>PYTHON / FLASK</span><span>CLOUDFLARE</span></div>
           </div>
           <div class="project-copy">
-            <div class="project-meta"><span class="project-number">01</span><span class="personal-label">Personal project</span></div>
+            <div class="project-meta"><span class="project-number">01</span><span class="personal-label" data-i18n="personal">Personal project</span></div>
             <h3 id="nafti-title">Nafti AI</h3>
-            <p class="project-tagline">A multimodal assistant, designed as one product experience.</p>
-            <p class="project-description">A Flask web app combining assisted chat, multi-image analysis, image generation, browser speech input, audio playback, and saved conversation sessions. The product also includes account creation and login, optional Google OAuth, activity profiles, settings, gallery interactions, shareable conversation links, and TXT/Markdown/JSON export. Provider availability and quotas can affect AI features.</p>
+            <p class="project-tagline" data-i18n="nafti.tag">A multimodal assistant, designed as one product experience.</p>
+            <p class="project-description" data-i18n="nafti.desc">A Flask web app combining assisted chat, multi-image analysis, image generation, browser speech input, audio playback, and saved conversation sessions. The product also includes account creation and login, optional Google OAuth, activity profiles, settings, gallery interactions, shareable conversation links, and TXT/Markdown/JSON export. Provider availability and quotas can affect AI features.</p>
             <ul class="tag-list" aria-label="Nafti AI capabilities and technologies">
               <li>Python · Flask · Jinja</li><li>Groq · Hugging Face</li><li>Transformers · Diffusers</li><li>Web Speech API · gTTS</li><li>Pillow · CORS · WSGI</li><li>Workers · D1 · Workers AI</li>
             </ul>
             <div class="project-links">
-              <a class="button button-dark" href="https://nafti-ai-edge.asser-dev.workers.dev/" target="_blank" rel="noopener noreferrer">Open live demo <span aria-hidden="true">↗</span></a>
-              <a class="source-link" href="https://github.com/anprogamernafti-boop/nafti-ai" target="_blank" rel="noopener noreferrer">View source code <span aria-hidden="true">↗</span></a>
+              <a class="button button-dark" href="https://nafti-ai-edge.asser-dev.workers.dev/" target="_blank" rel="noopener noreferrer"><bdi data-i18n="btn.demo">Open live demo</bdi> <span aria-hidden="true">↗</span></a>
+              <a class="source-link" href="https://github.com/anprogamernafti-boop/nafti-ai" target="_blank" rel="noopener noreferrer"><bdi data-i18n="btn.src">View source code</bdi> <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <article class="project-row project-clash" aria-labelledby="clash-title">
           <div class="project-visual visual-clash">
-            <div class="visual-topline"><span>02 / WEB + ANDROID</span><span>PERSONAL PROJECT</span></div>
+            <div class="visual-topline"><span>02 / WEB + ANDROID</span><span data-i18n="personalUp">PERSONAL PROJECT</span></div>
             <div class="clash-visual-core">
               <span class="clash-wordmark">CLASH<span>AI</span></span>
               <img src="assets/images/clash-icon.png" alt="Clash AI Android project icon" width="512" height="512" loading="lazy">
@@ -236,23 +273,23 @@
             <div class="visual-bottomline"><span>CAPACITOR · GRADLE</span><span>DERJA · SHAREABLE</span></div>
           </div>
           <div class="project-copy">
-            <div class="project-meta"><span class="project-number">02</span><span class="personal-label">Personal project</span></div>
+            <div class="project-meta"><span class="project-number">02</span><span class="personal-label" data-i18n="personal">Personal project</span></div>
             <h3 id="clash-title">Clash AI</h3>
-            <p class="project-tagline">A local-language idea, built for web and Android.</p>
-            <p class="project-description">Users submit a photo and receive a playful verdict in Tunisian Derja, with style, pose, expression, and atmosphere considered in the flow. The experience prepares vocalized Arabic text while preserving natural French or English words, then can produce a shareable card or short video. Gemini runs through a Cloudflare Worker, with browser CLIP fallback, optional OpenAI input, Android sharing, voice and billing hooks, quotas, origin checks, and model allowlists. VoxCPM voice generation remains an optional pilot, not a guaranteed production feature.</p>
+            <p class="project-tagline" data-i18n="clash.tag">A local-language idea, built for web and Android.</p>
+            <p class="project-description" data-i18n="clash.desc">Users submit a photo and receive a playful verdict in Tunisian Derja, with style, pose, expression, and atmosphere considered in the flow. The experience prepares vocalized Arabic text while preserving natural French or English words, then can produce a shareable card or short video. Gemini runs through a Cloudflare Worker, with browser CLIP fallback, optional OpenAI input, Android sharing, voice and billing hooks, quotas, origin checks, and model allowlists. VoxCPM voice generation remains an optional pilot, not a guaranteed production feature.</p>
             <ul class="tag-list" aria-label="Clash AI capabilities and technologies">
               <li>JavaScript · Node tests</li><li>Capacitor 6 · Android · Java</li><li>Gemini · Workers AI</li><li>Transformers.js · CLIP</li><li>KV quotas · rate limits</li><li>PWA · Android share</li><li>Gradle · Play Billing hooks</li>
             </ul>
             <div class="project-links">
-              <a class="button button-dark" href="https://clash-ai.pages.dev/" target="_blank" rel="noopener noreferrer">Open live demo <span aria-hidden="true">↗</span></a>
-              <a class="source-link" href="https://github.com/anprogamernafti-boop/clash-ai" target="_blank" rel="noopener noreferrer">View source code <span aria-hidden="true">↗</span></a>
+              <a class="button button-dark" href="https://clash-ai.pages.dev/" target="_blank" rel="noopener noreferrer"><bdi data-i18n="btn.demo">Open live demo</bdi> <span aria-hidden="true">↗</span></a>
+              <a class="source-link" href="https://github.com/anprogamernafti-boop/clash-ai" target="_blank" rel="noopener noreferrer"><bdi data-i18n="btn.src">View source code</bdi> <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
 
         <article class="project-row project-fashion" id="fashion-project" aria-labelledby="fashion-title">
           <div class="project-visual visual-fashion">
-            <div class="visual-topline"><span>03 / RESPONSIVE STOREFRONT</span><span>PERSONAL PROJECT</span></div>
+            <div class="visual-topline"><span>03 / RESPONSIVE STOREFRONT</span><span data-i18n="personalUp">PERSONAL PROJECT</span></div>
             <div class="fashion-image-wrap fashion-logo-stage">
               <span class="fashion-orbit fashion-orbit-one" aria-hidden="true"></span>
               <span class="fashion-orbit fashion-orbit-two" aria-hidden="true"></span>
@@ -266,16 +303,16 @@
             <div class="visual-bottomline"><span>HTML · CSS · JAVASCRIPT</span><span>GITHUB PAGES</span></div>
           </div>
           <div class="project-copy">
-            <div class="project-meta"><span class="project-number">03</span><span class="personal-label">Personal project</span></div>
+            <div class="project-meta"><span class="project-number">03</span><span class="personal-label" data-i18n="personal">Personal project</span></div>
             <h3 id="fashion-title">Fashion In Motion</h3>
-            <p class="project-tagline">A storefront experience from discovery to order.</p>
-            <p class="project-description">A responsive fashion storefront with catalog browsing, collection filters, wishlist interactions, an interactive cart with quantity controls and totals, checkout and delivery details, a payment modal with tabs and order summary, and a D17 transfer flow. Order notifications use FormSubmit. D17 transfer verification is manual by the merchant; the site does not integrate directly with a banking API.</p>
+            <p class="project-tagline" data-i18n="fim.tag">A storefront experience from discovery to order.</p>
+            <p class="project-description" data-i18n="fim.desc">A responsive fashion storefront with catalog browsing, collection filters, wishlist interactions, an interactive cart with quantity controls and totals, checkout and delivery details, a payment modal with tabs and order summary, and a D17 transfer flow. Order notifications use FormSubmit. D17 transfer verification is manual by the merchant; the site does not integrate directly with a banking API.</p>
             <ul class="tag-list" aria-label="Fashion In Motion capabilities and technologies">
               <li>HTML · CSS · JavaScript</li><li>Responsive UI</li><li>Filters · Wishlist · Cart</li><li>Checkout · Form validation</li><li>Payment UI · D17 flow</li><li>FormSubmit notifications</li><li>Google Fonts · Font Awesome</li>
             </ul>
             <div class="project-links">
-              <a class="button button-dark" href="https://anprogamernafti-boop.github.io/FashionInMotion/" target="_blank" rel="noopener noreferrer">Open live demo <span aria-hidden="true">↗</span></a>
-              <a class="source-link" href="https://github.com/anprogamernafti-boop/FashionInMotion" target="_blank" rel="noopener noreferrer">View source code <span aria-hidden="true">↗</span></a>
+              <a class="button button-dark" href="https://fashioninmotion.tn/" target="_blank" rel="noopener noreferrer"><bdi data-i18n="btn.demo">Open live demo</bdi> <span aria-hidden="true">↗</span></a>
+              <a class="source-link" href="https://github.com/anprogamernafti-boop/FashionInMotion" target="_blank" rel="noopener noreferrer"><bdi data-i18n="btn.src">View source code</bdi> <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </article>
@@ -283,21 +320,21 @@
 
 
       <section class="demos-section section-shell" id="demos" aria-labelledby="demos-title">
-        <p class="eyebrow">Live demonstrations <span class="eyebrow-line" aria-hidden="true"></span></p>
-        <h2 id="demos-title">Try the work,<br><span class="muted-heading">not just the description.</span></h2>
-        <p class="demos-note">The three public demos were checked before this update. Each link opens the live experience in a new tab; provider quotas and hosted-service availability may affect AI interactions.</p>
+        <p class="eyebrow"><bdi data-i18n="demos.eyebrow">Live demonstrations</bdi> <span class="eyebrow-line" aria-hidden="true"></span></p>
+        <h2 id="demos-title" data-i18n-html="demos.h2">Try the work,<br><span class="muted-heading">not just the description.</span></h2>
+        <p class="demos-note" data-i18n="demos.note">The three public demos were checked before this update. Each link opens the live experience in a new tab; provider quotas and hosted-service availability may affect AI interactions.</p>
         <div class="demo-grid">
           <a class="demo-card" href="https://nafti-ai-edge.asser-dev.workers.dev/" target="_blank" rel="noopener noreferrer">
             <img src="assets/images/nafti-icon.png" alt="Nafti AI icon" width="56" height="56" loading="lazy">
-            <span><strong>Nafti AI</strong><small>Multimodal assistant · live demo <span aria-hidden="true">↗</span></small></span>
+            <span><strong>Nafti AI</strong><small><bdi data-i18n="demo.nafti">Multimodal assistant · live demo</bdi> <span aria-hidden="true">↗</span></small></span>
           </a>
           <a class="demo-card" href="https://clash-ai.pages.dev/" target="_blank" rel="noopener noreferrer">
             <img src="assets/images/clash-icon.png" alt="Clash AI icon" width="56" height="56" loading="lazy">
-            <span><strong>Clash AI</strong><small>Derja web experience · live demo <span aria-hidden="true">↗</span></small></span>
+            <span><strong>Clash AI</strong><small><bdi data-i18n="demo.clash">Derja web experience · live demo</bdi> <span aria-hidden="true">↗</span></small></span>
           </a>
-          <a class="demo-card" href="https://anprogamernafti-boop.github.io/FashionInMotion/" target="_blank" rel="noopener noreferrer">
+          <a class="demo-card" href="https://fashioninmotion.tn/" target="_blank" rel="noopener noreferrer">
             <img class="demo-logo" src="assets/images/logoFIM.jpg" alt="Fashion In Motion logo" width="56" height="56" loading="lazy">
-            <span><strong>Fashion In Motion</strong><small>Responsive storefront · live demo <span aria-hidden="true">↗</span></small></span>
+            <span><strong>Fashion In Motion</strong><small><bdi data-i18n="demo.fim">Responsive storefront · live demo</bdi> <span aria-hidden="true">↗</span></small></span>
           </a>
         </div>
       </section>
@@ -305,24 +342,24 @@
       <section class="approach-section" id="approach" aria-labelledby="approach-title">
         <div class="section-shell approach-inner">
           <div class="approach-heading">
-            <p class="eyebrow eyebrow-light">How I build <span class="eyebrow-line" aria-hidden="true"></span></p>
-            <h2 id="approach-title">Make the feature<br><span>work for the person.</span></h2>
-            <p>I focus on the connection between interface behavior, useful integrations, and a product flow people can understand.</p>
+            <p class="eyebrow eyebrow-light"><bdi data-i18n="ap.eyebrow">How I build</bdi> <span class="eyebrow-line" aria-hidden="true"></span></p>
+            <h2 id="approach-title" data-i18n-html="ap.h2">Make the feature<br><span>work for the person.</span></h2>
+            <p data-i18n="ap.p">I focus on the connection between interface behavior, useful integrations, and a product flow people can understand.</p>
           </div>
           <div class="approach-list">
             <article class="approach-item">
               <span class="approach-index">01</span>
-              <div><h3>Start with the user flow</h3><p>Make the next action clear across screen sizes, from browsing and filtering to submitting an input, sharing an output, or placing an order.</p></div>
+              <div><h3 data-i18n="ap.1h">Start with the user flow</h3><p data-i18n="ap.1p">Make the next action clear across screen sizes, from browsing and filtering to submitting an input, sharing an output, or placing an order.</p></div>
               <span class="approach-mark" aria-hidden="true">↘</span>
             </article>
             <article class="approach-item">
               <span class="approach-index">02</span>
-              <div><h3>Integrate with clear boundaries</h3><p>Connect APIs and AI services while communicating provider limits, manual steps, consent rules, fallbacks, and experimental features accurately.</p></div>
+              <div><h3 data-i18n="ap.2h">Integrate with clear boundaries</h3><p data-i18n="ap.2p">Connect APIs and AI services while communicating provider limits, manual steps, consent rules, fallbacks, and experimental features accurately.</p></div>
               <span class="approach-mark" aria-hidden="true">↘</span>
             </article>
             <article class="approach-item">
               <span class="approach-index">03</span>
-              <div><h3>Build, test, deploy, learn</h3><p>Bring a practical web or mobile feature into a working deployment, add testable boundaries where useful, then use the result to guide the next iteration.</p></div>
+              <div><h3 data-i18n="ap.3h">Build, test, deploy, learn</h3><p data-i18n="ap.3p">Bring a practical web or mobile feature into a working deployment, add testable boundaries where useful, then use the result to guide the next iteration.</p></div>
               <span class="approach-mark" aria-hidden="true">↘</span>
             </article>
           </div>
@@ -331,80 +368,80 @@
 
       <section class="toolkit-section section-shell" id="toolkit" aria-labelledby="toolkit-title">
         <div class="toolkit-intro">
-          <p class="eyebrow">Skills, connected to evidence <span class="eyebrow-line" aria-hidden="true"></span></p>
-          <h2 id="toolkit-title">A practical toolkit,<br><span class="muted-heading">applied to the product.</span></h2>
-          <p>This is an expanded evidence map of the skills visible in the three personal repositories. It includes implementation patterns, libraries, delivery tooling, and product operations. It is not a claim to mastery of every listed technology. Optional pilots and provider-dependent features are labelled as such.</p>
+          <p class="eyebrow"><bdi data-i18n="tk.eyebrow">Skills, connected to evidence</bdi> <span class="eyebrow-line" aria-hidden="true"></span></p>
+          <h2 id="toolkit-title" data-i18n-html="tk.h2">A practical toolkit,<br><span class="muted-heading">applied to the product.</span></h2>
+          <p data-i18n="tk.p">This is an expanded evidence map of the skills visible in the three personal repositories. It includes implementation patterns, libraries, delivery tooling, and product operations. It is not a claim to mastery of every listed technology. Optional pilots and provider-dependent features are labelled as such.</p>
         </div>
         <div class="toolkit-groups" aria-label="Complete skills demonstrated by personal projects">
           <div class="toolkit-group">
-            <h3>Frontend foundations</h3>
+            <h3 data-i18n="tk.g1">Frontend foundations</h3>
             <ul class="skill-tags" aria-label="Frontend foundations">
               <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Responsive layouts</li><li>Semantic UI</li><li>Accessibility basics</li><li>Browser APIs</li><li>Fetch API</li><li>localStorage</li><li>sessionStorage</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> all three projects use browser-facing interfaces; Fashion In Motion demonstrates a responsive static storefront, while Nafti AI and Clash AI use browser APIs, client state and interactive product screens.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e1">all three projects use browser-facing interfaces; Fashion In Motion demonstrates a responsive static storefront, while Nafti AI and Clash AI use browser APIs, client state and interactive product screens.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Product UX &amp; commerce flows</h3>
+            <h3 data-i18n="tk.g2">Product UX &amp; commerce flows</h3>
             <ul class="skill-tags" aria-label="Product UX and commerce skills">
               <li>Product catalogues</li><li>Collection filters</li><li>Wishlist interactions</li><li>Interactive cart</li><li>Quantity controls</li><li>Totals</li><li>Checkout UI</li><li>Order forms</li><li>Delivery details</li><li>Payment modals</li><li>Tabs</li><li>Form validation</li><li>Order notifications</li><li>Lookbook sections</li><li>Reviews and contact sections</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Fashion In Motion implements the storefront journey from browsing and filtering through cart, order details and payment-method presentation. The D17 transfer is manually verified, not bank-API automated.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e2">Fashion In Motion implements the storefront journey from browsing and filtering through cart, order details and payment-method presentation. The D17 transfer is manually verified, not bank-API automated.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Python web engineering</h3>
+            <h3 data-i18n="tk.g3">Python web engineering</h3>
             <ul class="skill-tags" aria-label="Python web engineering skills">
               <li>Python</li><li>Flask</li><li>Jinja templates</li><li>WSGI</li><li>Gunicorn</li><li>REST-style endpoints</li><li>JSON responses</li><li>Requests</li><li>Flask-CORS</li><li>Environment configuration</li><li>Session management</li><li>Google OAuth</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Nafti AI’s Flask server, templates, WSGI entrypoint, optional Flask-Dance Google login, CORS layer, JSON routes and provider calls.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e3">Nafti AI’s Flask server, templates, WSGI entrypoint, optional Flask-Dance Google login, CORS layer, JSON routes and provider calls.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>AI, ML &amp; image systems</h3>
+            <h3 data-i18n="tk.g4">AI, ML &amp; image systems</h3>
             <ul class="skill-tags" aria-label="AI and machine learning skills">
               <li>AI/API integrations</li><li>Assisted chat</li><li>Image analysis</li><li>Image generation</li><li>Groq</li><li>Gemini</li><li>OpenAI option</li><li>Hugging Face APIs</li><li>Workers AI</li><li>Transformers</li><li>Transformers.js</li><li>Diffusers</li><li>PyTorch</li><li>Torchvision</li><li>CLIP</li><li>Accelerate</li><li>Safetensors</li><li>Hugging Face Hub</li><li>Pillow</li><li>Langdetect</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Nafti AI combines chat, visual analysis and image generation across Flask/provider paths; Clash AI uses Gemini through a Worker with Transformers.js/CLIP browser fallback and additional provider options.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e4">Nafti AI combines chat, visual analysis and image generation across Flask/provider paths; Clash AI uses Gemini through a Worker with Transformers.js/CLIP browser fallback and additional provider options.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Voice &amp; language experiences</h3>
+            <h3 data-i18n="tk.g5">Voice &amp; language experiences</h3>
             <ul class="skill-tags" aria-label="Voice and language skills">
               <li>Web Speech API</li><li>Speech recognition</li><li>Browser audio playback</li><li>gTTS</li><li>Language detection</li><li>Tunisian Derja</li><li>Vocalized Arabic text</li><li>French/English word preservation</li><li>NumPy audio processing</li><li>torchaudio</li><li>SoundFile</li><li>Voice corpus evaluation</li><li>VoxCPM optional pilot</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Nafti AI implements browser dictation and audio playback paths. Clash AI prepares derja text for voice and contains audio-processing, corpus and evaluation tooling. VoxCPM is explicitly experimental and quota-dependent, not a guaranteed production feature.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e5">Nafti AI implements browser dictation and audio playback paths. Clash AI prepares derja text for voice and contains audio-processing, corpus and evaluation tooling. VoxCPM is explicitly experimental and quota-dependent, not a guaranteed production feature.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Accounts, state &amp; sharing</h3>
+            <h3 data-i18n="tk.g6">Accounts, state &amp; sharing</h3>
             <ul class="skill-tags" aria-label="Accounts, state and sharing skills">
               <li>Email/password forms</li><li>Google OAuth option</li><li>Secure session concepts</li><li>User profiles</li><li>Activity statistics</li><li>Multi-session history</li><li>Gallery state</li><li>TXT export</li><li>Markdown export</li><li>JSON export</li><li>Share links</li><li>Web Share API</li><li>Download flows</li><li>Shareable cards</li><li>Short videos</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Nafti AI provides accounts, profiles, saved sessions, gallery state, conversation exports and share links; Clash AI adds native/web sharing and shareable media outputs.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e6">Nafti AI provides accounts, profiles, saved sessions, gallery state, conversation exports and share links; Clash AI adds native/web sharing and shareable media outputs.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Mobile &amp; native delivery</h3>
+            <h3 data-i18n="tk.g7">Mobile &amp; native delivery</h3>
             <ul class="skill-tags" aria-label="Mobile and native delivery skills">
               <li>Android development</li><li>Capacitor 6</li><li>Java Android plugins</li><li>Gradle</li><li>Android Studio workflow</li><li>Android SDK setup</li><li>Native share plugin</li><li>Native voice plugin</li><li>Google Play Billing hooks</li><li>BillingManager</li><li>Debug APK build scripts</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Clash AI contains a Capacitor web app, complete Android project structure, Java plugin bridges, Gradle configuration, native sharing/voice integration and billing client hooks.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e7">Clash AI contains a Capacitor web app, complete Android project structure, Java plugin bridges, Gradle configuration, native sharing/voice integration and billing client hooks.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Cloud, serverless &amp; deployment</h3>
+            <h3 data-i18n="tk.g8">Cloud, serverless &amp; deployment</h3>
             <ul class="skill-tags" aria-label="Cloud and deployment skills">
               <li>Cloudflare Workers</li><li>Cloudflare Pages</li><li>Cloudflare D1</li><li>Cloudflare KV</li><li>Workers AI</li><li>Wrangler</li><li>Serverless proxies</li><li>GitHub Pages</li><li>Progressive Web Apps</li><li>Service workers</li><li>Hugging Face Spaces</li><li>ZeroGPU pilots</li><li>Render deployment notes</li><li>Docker/Gunicorn deployment</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Nafti AI documents Flask/WSGI and Cloudflare D1/Workers AI paths; Clash AI uses Pages, Workers, KV and Workers AI; Fashion In Motion is published as a static GitHub Pages site.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e8">Nafti AI documents Flask/WSGI and Cloudflare D1/Workers AI paths; Clash AI uses Pages, Workers, KV and Workers AI; Fashion In Motion is published as a static GitHub Pages site.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Reliability, security &amp; operations</h3>
+            <h3 data-i18n="tk.g9">Reliability, security &amp; operations</h3>
             <ul class="skill-tags" aria-label="Reliability and security skills">
               <li>Provider fallbacks</li><li>Rate limiting</li><li>IP/device quotas</li><li>KV quota counters</li><li>Origin validation</li><li>CORS controls</li><li>Image-size validation</li><li>Model allowlists</li><li>Unavailable-provider handling</li><li>Secret separation</li><li>Privacy notices</li><li>Photo-consent rules</li><li>Manual payment reconciliation</li><li>Clear feature qualification</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Clash AI’s proxy and Workers include quota, origin, input-size, model and availability controls; the repositories document privacy and consent boundaries. Fashion In Motion makes manual D17 verification explicit, and Nafti AI communicates provider limits.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e9">Clash AI’s proxy and Workers include quota, origin, input-size, model and availability controls; the repositories document privacy and consent boundaries. Fashion In Motion makes manual D17 verification explicit, and Nafti AI communicates provider limits.</bdi></p>
           </div>
           <div class="toolkit-group">
-            <h3>Testing &amp; developer tooling</h3>
+            <h3 data-i18n="tk.g10">Testing &amp; developer tooling</h3>
             <ul class="skill-tags" aria-label="Testing and developer tooling skills">
               <li>Node.js test runner</li><li>Python unittest</li><li>Testable pure functions</li><li>npm</li><li>Wrangler configuration</li><li>Gradle wrapper</li><li>PowerShell build scripts</li><li>Environment variables</li><li>Git/GitHub workflows</li><li>Build troubleshooting</li>
             </ul>
-            <p class="skill-evidence"><strong>Evidence:</strong> Clash AI includes Node and Python tests for billing, voice-budget and corpus-evaluation logic, plus Windows/Gradle setup and build scripts. The three repositories are maintained and delivered through Git-based project workflows.</p>
+            <p class="skill-evidence"><strong data-i18n="ev">Evidence:</strong> <bdi data-i18n="tk.e10">Clash AI includes Node and Python tests for billing, voice-budget and corpus-evaluation logic, plus Windows/Gradle setup and build scripts. The three repositories are maintained and delivered through Git-based project workflows.</bdi></p>
           </div>
         </div>
       </section>
@@ -412,43 +449,51 @@
       <section class="contact-section section-shell" id="contact" aria-labelledby="contact-title">
         <div class="contact-card">
           <div class="contact-orbit" aria-hidden="true"></div>
-          <p class="eyebrow eyebrow-light"><span class="eyebrow-dot" aria-hidden="true"></span> Open to the right collaboration</p>
-          <h2 id="contact-title">Have a product feature<br>that needs building?</h2>
-          <p>I’m open to paid remote freelance and part-time opportunities in web development, frontend implementation, API integration, Android products, product flows, and pragmatic AI-enabled features.</p>
+          <p class="eyebrow eyebrow-light"><span class="eyebrow-dot" aria-hidden="true"></span> <bdi data-i18n="ct.eyebrow">Open to the right collaboration</bdi></p>
+          <h2 id="contact-title" data-i18n-html="ct.h2">Have a product feature<br>that needs building?</h2>
+          <p data-i18n="ct.p">I’m open to paid remote freelance and part-time opportunities in web development, frontend implementation, API integration, Android products, product flows, and pragmatic AI-enabled features.</p>
+          <div class="wa-row">
+            <a class="button button-whatsapp" data-wa href="https://wa.me/21658863209?text=Hello%20Asser%2C%20I%20found%20your%20portfolio%20and%20I%E2%80%99d%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              <bdi data-i18n="wa.btn">Message me on WhatsApp</bdi>
+            </a>
+            <span class="wa-number" dir="ltr">+216 58 863 209</span>
+          </div>
           <!-- FormSubmit: after the first test message and the activation email, replace the address in data-endpoint with the random alias FormSubmit gives you. -->
           <form class="contact-form" id="contact-form" novalidate data-endpoint="https://formsubmit.co/ajax/assaratraore56@gmail.com">
             <div class="field">
-              <label for="cf-name">Your name</label>
+              <label for="cf-name" data-i18n="f.name">Your name</label>
               <input id="cf-name" name="name" type="text" autocomplete="name" required>
             </div>
             <div class="field">
-              <label for="cf-email">Your email</label>
+              <label for="cf-email" data-i18n="f.email">Your email</label>
               <input id="cf-email" name="email" type="email" autocomplete="email" required>
             </div>
             <div class="field field-wide">
-              <label for="cf-type">What do you need?</label>
+              <label for="cf-type" data-i18n="f.type">What do you need?</label>
               <select id="cf-type" name="project_type">
-                <option>Website or landing page</option>
-                <option>Web app (Flask or JavaScript)</option>
-                <option>Android app</option>
-                <option>AI or API integration</option>
-                <option>Something else</option>
+                <option value="Website or landing page" data-i18n="o1">Website or landing page</option>
+                <option value="Web app (Flask or JavaScript)" data-i18n="o2">Web app (Flask or JavaScript)</option>
+                <option value="Android app" data-i18n="o3">Android app</option>
+                <option value="AI or API integration" data-i18n="o4">AI or API integration</option>
+                <option value="Something else" data-i18n="o5">Something else</option>
               </select>
             </div>
             <div class="field field-wide">
-              <label for="cf-message">Project details</label>
-              <textarea id="cf-message" name="message" rows="5" required placeholder="What should it do, who is it for, and when do you need it?"></textarea>
+              <label for="cf-message" data-i18n="f.msg">Project details</label>
+              <textarea id="cf-message" name="message" rows="5" required placeholder="What should it do, who is it for, and when do you need it?" data-i18n-ph="f.ph"></textarea>
             </div>
             <input class="contact-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="hidden" name="_subject" value="New message from your portfolio">
             <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="page_language" id="cf-lang" value="en">
             <div class="contact-actions">
-              <button class="button button-primary" type="submit" id="cf-submit">Send message</button>
+              <button class="button button-primary" type="submit" id="cf-submit" data-i18n="f.send">Send message</button>
               <p class="contact-status" id="cf-status" role="status" aria-live="polite"></p>
             </div>
           </form>
-          <p class="contact-alt">Prefer LinkedIn? <a href="https://www.linkedin.com/in/asser-nafti-622275448/" target="_blank" rel="noopener noreferrer">Message me there <span aria-hidden="true">↗</span></a></p>
-          <span class="contact-location">Sousse, Tunisia <span aria-hidden="true">·</span> Remote collaboration</span>
+          <p class="contact-alt"><bdi data-i18n="ct.alt">Prefer LinkedIn?</bdi> <a href="https://www.linkedin.com/in/asser-nafti-622275448/" target="_blank" rel="noopener noreferrer"><bdi data-i18n="ct.alt2">Message me there</bdi> <span aria-hidden="true">↗</span></a></p>
+          <span class="contact-location"><bdi data-i18n="ct.loc1">Sousse, Tunisia</bdi> <span aria-hidden="true">·</span> <bdi data-i18n="ct.loc2">Remote collaboration</bdi></span>
         </div>
       </section>
     </main>
@@ -459,13 +504,18 @@
           <span class="wordmark-icon" aria-hidden="true">A<span>/</span></span>
           <span>ASSER NAFTI</span>
         </a>
-        <p>Web &amp; Android App Developer · Sousse, Tunisia</p>
+        <p data-i18n="ft.role">Web &amp; Android App Developer · Sousse, Tunisia</p>
         <div class="footer-links">
           <a href="https://www.linkedin.com/in/asser-nafti-622275448/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a href="https://github.com/anprogamernafti-boop" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a data-wa href="https://wa.me/21658863209?text=Hello%20Asser%2C%20I%20found%20your%20portfolio%20and%20I%E2%80%99d%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
           <span>© <span data-current-year>2026</span> Asser Nafti</span>
         </div>
       </div>
     </footer>
+
+    <a class="wa-float" data-wa href="https://wa.me/21658863209?text=Hello%20Asser%2C%20I%20found%20your%20portfolio%20and%20I%E2%80%99d%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" title="Chat on WhatsApp" data-i18n-label="wa.float">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
   </body>
 </html>
